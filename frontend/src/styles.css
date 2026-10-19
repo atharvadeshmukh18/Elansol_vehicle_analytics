@@ -1,0 +1,58 @@
+:root {
+  --bg: #e8ebee; --panel: #fbfbfa; --ink: #18222c; --muted: #5d6b79; --line: #d6dce2;
+  --in: #0f766e; --out: #b4412c; --signal: #f2a900;
+  font-family: "IBM Plex Sans", system-ui, sans-serif; color: var(--ink);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); font-variant-numeric: tabular-nums; }
+.shell { max-width: 1280px; margin: 0 auto; padding: 24px 20px 40px; }
+.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+h1 { font: 600 30px "IBM Plex Sans Condensed", sans-serif; margin: 0; letter-spacing: .2px; }
+.top p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+h2 { font: 600 15px "IBM Plex Sans Condensed", sans-serif; margin: 0 0 12px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; font-size: 13px; background: var(--panel); border: 1px solid var(--line); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.pill.ok .dot { background: #1c9a57; } .pill.bad .dot { background: var(--out); }
+
+.grid { display: grid; gap: 16px; grid-template-columns: 2fr 1fr; grid-template-areas: "video totals" "video colors" "rate rate" "table table"; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
+.video { grid-area: video; padding: 0; overflow: hidden; } .totals { grid-area: totals; } .colors { grid-area: colors; }
+.rate { grid-area: rate; } .table { grid-area: table; }
+
+.player { position: relative; aspect-ratio: 16/9; background: #11181f; }
+.player video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.player-empty { position: absolute; inset: 0; display: grid; place-content: center; gap: 6px; text-align: center; color: #c9d2db; padding: 24px; font-size: 14px; }
+.player-empty strong { color: #fff; font-size: 16px; }
+code { background: rgba(255,255,255,.12); padding: 1px 5px; border-radius: 3px; }
+.video-foot { padding: 10px 16px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
+
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-label { font-size: 13px; color: var(--muted); }
+.stat-value { font: 600 28px "IBM Plex Sans Condensed", sans-serif; }
+.stat.big .stat-value { font-size: 64px; line-height: 1; border-left: 6px solid var(--signal); padding-left: 12px; }
+.stat.big .stat-label { padding-left: 18px; margin-bottom: 4px; }
+.split { display: flex; gap: 32px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.stat.in .stat-value { color: var(--in); } .stat.out .stat-value { color: var(--out); }
+
+.bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.bars li { display: grid; grid-template-columns: 64px 1fr 32px; align-items: center; gap: 10px; font-size: 14px; }
+.bars .name { text-transform: capitalize; }
+.track { height: 12px; background: #eceff2; border-radius: 2px; overflow: hidden; }
+.fill { display: block; height: 100%; border: 1px solid rgba(0,0,0,.25); border-radius: 2px; transition: width .4s; }
+.num { text-align: right; font-weight: 600; }
+.chart { height: 180px; }
+
+.scroll { overflow-x: auto; max-height: 420px; overflow-y: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; font-weight: 500; color: var(--muted); font-size: 13px; padding: 8px 10px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--panel); }
+td { padding: 9px 10px; border-bottom: 1px solid #edf0f2; text-transform: capitalize; }
+td:first-child, td:nth-child(2), td:nth-child(5), td:nth-child(6) { text-transform: none; }
+.chip { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; vertical-align: -1px; border: 1px solid rgba(0,0,0,.3); }
+.dir { font-weight: 600; } .dir.IN { color: var(--in); } .dir.OUT { color: var(--out); }
+.empty { color: var(--muted); font-size: 14px; text-align: left; }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; grid-template-areas: "video" "totals" "colors" "rate" "table"; }
+  .stat.big .stat-value { font-size: 52px; }
+}
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }

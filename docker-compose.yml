@@ -1,0 +1,38 @@
+# MediaMTX (video broker) + PostgreSQL + REST API.
+# DeepStream runs on the host (or NVIDIA container) because it needs the GPU.
+services:
+  mediamtx:
+    image: bluenviron/mediamtx:1.9.3
+    restart: unless-stopped
+    ports:
+      - "8554:8554"   # RTSP
+      - "8888:8888"   # HLS
+      - "8889:8889"   # WebRTC
+    volumes:
+      - ./mediamtx/mediamtx.yml:/mediamtx.yml:ro
+
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vision
+      POSTGRES_PASSWORD: vision
+      POSTGRES_DB: vehicles
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://vision:vision@postgres:5432/vehicles
+      PORT: 4000
+    depends_on: [postgres]
+    ports:
+      - "4000:4000"
+
+volumes:
+  pgdata:

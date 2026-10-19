@@ -1,0 +1,5 @@
+# Thin wrapper note: app.py points nvtracker at DeepStream's stock NvDCF config.
+# Copy and tune it here if needed:
+#   cp /opt/nvidia/deepstream/deepstream/samples/configs/deepstream-app/config_tracker_NvDCF_perf.yml .
+# Key knobs to explain in the interview: maxShadowTrackingAge (how long a lost track survives),
+# minDetectorConfidence, probationAge (frames before a track is confirmed).

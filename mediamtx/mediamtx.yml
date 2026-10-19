@@ -1,0 +1,16 @@
+# Minimal MediaMTX config. Any path can be published to and read from.
+#   raw feed        : rtsp://localhost:8554/traffic     (FFmpeg publishes here)
+#   annotated feed  : rtsp://localhost:8554/annotated   (DeepStream publishes here)
+#   browser playback: http://localhost:8888/annotated/index.m3u8  (HLS)
+logLevel: info
+rtsp: yes
+rtspAddress: :8554
+hls: yes
+hlsAddress: :8888
+hlsAllowOrigins: ['*']      # lets the React app (another origin) load HLS
+hlsVariant: lowLatency
+webrtc: yes
+webrtcAddress: :8889
+webrtcAllowOrigins: ['*']
+paths:
+  all_others:

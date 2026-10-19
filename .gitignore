@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+__pycache__/
+*.engine
+deepstream/models/
+*.mp4

@@ -1,0 +1,23 @@
+# SECONDARY classifier (gie-unique-id=2): car colour on cropped vehicle boxes only.
+[property]
+gpu-id=0
+net-scale-factor=1
+model-file=../models/carcolor/resnet18.caffemodel
+proto-file=../models/carcolor/resnet18.prototxt
+model-engine-file=../models/carcolor/resnet18.caffemodel_b16_gpu0_int8.engine
+mean-file=../models/carcolor/mean.ppm
+labelfile-path=../models/carcolor/labels.txt
+force-implicit-batch-dim=1
+batch-size=16
+network-mode=1
+model-color-format=1
+process-mode=2                 # 2 = secondary: run on objects, not full frames
+is-classifier=1
+gie-unique-id=2
+operate-on-gie-id=1            # only objects produced by the primary detector...
+operate-on-class-ids=0         # ...and only class 0 (car)
+classifier-async-mode=1        # don't stall the pipeline; result attaches when ready (needs tracker)
+classifier-threshold=0.51
+input-object-min-width=64
+input-object-min-height=64
+output-blob-names=predictions/Softmax

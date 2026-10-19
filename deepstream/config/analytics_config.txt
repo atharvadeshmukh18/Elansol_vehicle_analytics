@@ -1,0 +1,17 @@
+# nvdsanalytics: virtual tripwire. Coordinates are in config-width x config-height space.
+# Two overlapping lines with OPPOSITE direction vectors => 'IN' fires for downward motion, 'OUT' for upward.
+# Format: line-crossing-<NAME>=dirX1;dirY1;dirX2;dirY2;lineX1;lineY1;lineX2;lineY2
+[property]
+enable=1
+config-width=1280
+config-height=720
+osd-mode=2
+display-font-size=12
+
+[line-crossing-stream-0]
+enable=1
+line-crossing-IN=640;500;640;580;100;540;1180;540
+line-crossing-OUT=640;580;640;500;100;540;1180;540
+class-id=0
+extended=0
+mode=strict

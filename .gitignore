@@ -5,3 +5,6 @@ __pycache__/
 *.engine
 deepstream/models/
 *.mp4
+
+# Large downloaded installers
+deepstream/downloads/
